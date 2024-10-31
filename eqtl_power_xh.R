@@ -102,6 +102,13 @@ parse_vector <- function(str) {
     as.numeric(unlist(strsplit(str, ",")))
 }
 
+# Reconcile this model:  https://bwhbioinfo.shinyapps.io/powerEQTL/
+compute_pve_from_slope <- function(slope, MAF, sigma.y) {
+    sigma2.x = 2 * MAF * (1 - MAF)
+    pve = (slope^2 * sigma2.x) / (sigma.y^2)
+    return(pve)
+}
+
 # Main execution function
 main <- function() {
     # Parse command line arguments
